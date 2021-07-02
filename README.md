@@ -79,7 +79,7 @@ spack/etc/spack/defaults/packages.yaml
 We will leave these untouched but copy them to ~/.spack for modification.  Files in this directory overload the defaults.  Running the command *spack compiler find* adds a compilers.yaml file to the ~/.spack directory.
 
 
-You can get copies of the *.yaml files from the repository 
+You can get copies of the *.yaml files from the repository [https://github.com/timkphd/spackit.git](https://github.com/timkphd/spackit.git)
 
 Note there are two versions of the compilers.yaml file.  *compilers.backup* was the one created  initialy with the *spack compiler find* command.  If you are rebuilding the environment from scratch this should is the one you should start with.
 
