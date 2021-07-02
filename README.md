@@ -278,7 +278,13 @@ task    thread             node name  first task    # on node  core
 
 
 
+## Custom and customizing packages
 
+## Installing VASP
+
+## Pointing to preinstalled apps/libs instead of building them
+
+## Spack Hierarchies
 
 
 
