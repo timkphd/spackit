@@ -344,6 +344,90 @@ Remove the "#"s and spacke will use a version of *berkeley-db* installed int /us
 
 ## Spack Hierarchies
 
+Spack allows building with hierarchies.  In the documentation it is called *Chaining Spack Installations* , [https://spack.readthedocs.io/en/latest/chain.html](https://spack.readthedocs.io/en/latest/chain.html)
+
+First you create a new instance of spack as discussed above.  Here we create it in directory spack\_01.  I added a line to the myenv file to facilitate activation of this version.  
+
+You can create a upstreams.yaml file either in 
+/home/ec2-user/spack_01/spack/etc/spack/upstreams.yaml  or in .spack
+ 
+ 
+
+Here is an example upstreams.yaml file.
+
+```
+[ec2-user@ip-172-31-17-54 .spack]$ pwd
+/home/ec2-user/.spack
+[ec2-user@ip-172-31-17-54 .spack]$ cat upstreams.yaml 
+upstreams:
+  spack-base:
+    install_tree: /nopt/nrel
+    modules:
+            lmod: /nopt/nrel/modules/lmod/linux-amzn2-x86_64/gcc/9.4.0
+```
+
+I also updated the config.yaml file to put built applications in a new directory /nopt/nrel/level2
+
+Here is the change to config.yaml
+
+```
+[ec2-user@ip-172-31-17-54 .spack]$ head -28 config.yaml | tail -9
+          #    root: $spack/opt/spack
+          #root: /nopt/nrel/spack
+    root: /nopt/nrel
+    projections:
+            #all: "${ARCHITECTURE}/${COMPILERNAME}-${COMPILERVER}/${PACKAGE}-${VERSION}-${HASH}"
+      all: "base/${COMPILERNAME}-${COMPILERVER}/${PACKAGE}-${VERSION}"
+      all: "level2/${COMPILERNAME}-${COMPILERVER}/${PACKAGE}-${VERSION}"
+    # install_tree can include an optional padded length (int or boolean)
+    # default is False (do not pad)
+[ec2-user@ip-172-31-17-54 .spack]$ 
+
+```
+Then we can do an install.  Note that it is referencing our previous builds.
+
+```
+[ec2-user@ip-172-31-17-54 .spack]$ spack install python@3.9.6
+[+] /nopt/nrel/base/gcc-9.4.0/libiconv-1.16
+[+] /nopt/nrel/base/gcc-9.4.0/libmd-1.0.3
+[+] /nopt/nrel/base/gcc-9.4.0/pkgconf-1.7.4
+[+] /nopt/nrel/base/gcc-9.4.0/xz-5.2.5
+[+] /nopt/nrel/base/gcc-9.4.0/zlib-1.2.11
+[+] /nopt/nrel/base/gcc-9.4.0/libffi-3.3
+[+] /nopt/nrel/base/gcc-9.4.0/berkeley-db-18.1.40
+[+] /nopt/nrel/base/gcc-9.4.0/diffutils-3.7
+[+] /nopt/nrel/base/gcc-9.4.0/tar-1.34
+[+] /nopt/nrel/base/gcc-9.4.0/libbsd-0.11.3
+[+] /nopt/nrel/base/gcc-9.4.0/ncurses-6.2
+[+] /nopt/nrel/base/gcc-9.4.0/util-linux-uuid-2.36.2
+[+] /nopt/nrel/base/gcc-9.4.0/libxml2-2.9.10
+[+] /nopt/nrel/base/gcc-9.4.0/bzip2-1.0.8
+[+] /nopt/nrel/base/gcc-9.4.0/expat-2.3.0
+[+] /nopt/nrel/base/gcc-9.4.0/readline-8.1
+[+] /nopt/nrel/base/gcc-9.4.0/gettext-0.21
+[+] /nopt/nrel/base/gcc-9.4.0/sqlite-3.35.5
+[+] /nopt/nrel/base/gcc-9.4.0/gdbm-1.19
+[+] /nopt/nrel/base/gcc-9.4.0/perl-5.34.0
+[+] /nopt/nrel/base/gcc-9.4.0/openssl-1.1.1k
+==> Installing python-3.9.6-dudge5tjdikoubasipx3ykcguw5jsc2p
+==> No binary for python-3.9.6-dudge5tjdikoubasipx3ykcguw5jsc2p found: installing from source
+==> Fetching https://mirror.spack.io/_source-cache/archive/d0/d0a35182e19e416fc8eae25a3dcd4d02d4997333e4ad1f2eee6010aadc3fe866.tgz
+==> Applied patch /home/ec2-user/spack_01/spack/var/spack/repos/builtin/packages/python/python-3.7.4+-distutils-C++.patch
+==> Ran patch() for python
+==> python: Executing phase: 'autoreconf'
+==> python: Executing phase: 'configure'
+==> python: Executing phase: 'build'
+==> python: Executing phase: 'install'
+==> python: Successfully installed python-3.9.6-dudge5tjdikoubasipx3ykcguw5jsc2p
+  Fetch: 0.66s.  Build: 52.12s.  Total: 52.79s.
+[+] /nopt/nrel/level2/gcc-9.4.0/python-3.9.6
+[ec2-user@ip-172-31-17-54 .spack]$ ls /nopt/nrel/level2/gcc-9.4.0/python-3.9.6
+bin  include  lib  share
+```
+
+We could/should also change the modules.yaml file to create a new directory.
+
+
 
 
 
