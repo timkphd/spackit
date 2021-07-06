@@ -280,11 +280,71 @@ task    thread             node name  first task    # on node  core
 
 ## Custom and customizing packages
 
+There is repositoy of recipies for building packages at [https://spack.readthedocs.io/en/latest/package_list.html](https://spack.readthedocs.io/en/latest/package_list.html)
+
+You can customize builds by specifing arguments on the command line.  See: [https://spack.readthedocs.io/en/latest/features.html#simple-package-installation]()
+
+Also, you can download a recipe and modify it.  First create a location for storing package recipes.  Recipes are python classes.  
+
+```
+spack repo create myrepo
+spack repo add /home/ec2-user/myrepo
+```
+
+Create a subdirectory for the recipe and download it.  Say we want to build *mpibash* from a modified recipe.  We would put the original recipe in a subdirectory *~/myrepo/packages/mpibash* and modify it.  Our directory structure would be:
+
+```
+[ec2-user@ip-172-31-17-54 ~]$ ls -R myrepo/
+myrepo/:
+packages  repo.yaml
+
+myrepo/packages:
+mpibash
+
+myrepo/packages/mpibash:
+package.py
+[ec2-user@ip-172-31-17-54 ~]$ 
+```
+You can create a template for a package using the commands
+
+```
+spack create bonk
+```
+
+or 
+
+```
+spack create https://raw.githubusercontent.com/timkphd/examples/master/hybrid/fhostone.f90
+```
+
+The first instance creates a template assuming the source is local; the second form assumes the source will be downloaded.  Source can be a tar ball.
+
+
 ## Installing VASP
+
+VASP can be installed via spack.  However, since the source is licensed it will not be downloaded.  You will need to have a copy in your directory before building it.  
+
 
 ## Pointing to preinstalled apps/libs instead of building them
 
+When spack builds a package it will by default download dependancies and build them, often even if the dependancy is installed as part of the OS.  You can tell spack to usa a local copy of software instead of building it.  The file ~/.spack/packages.yaml has an example of how this is done.  (Actually the code is commented out.)  We have:
+
+```
+. . .
+packages:
+        #  berkeley-db:
+        #    externals:
+        #    - spec: "berkeley-db@18.1.40"
+        #      prefix: /usr/bin
+. . .
+```
+
+Remove the "#"s and spacke will use a version of *berkeley-db* installed int /usr/bin.
+
+
 ## Spack Hierarchies
+
+
 
 
 
