@@ -1,0 +1,6 @@
+upstreams:
+  spack-base:
+    install_tree: /nopt/nrel
+    modules:
+            lmod: /nopt/nrel/modules/lmod/linux-amzn2-x86_64/gcc/9.4.0
+
