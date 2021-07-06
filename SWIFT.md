@@ -1,3 +1,9 @@
+## OS version
+
+[https://rockylinux.org](https://rockylinux.org)
+
+Rocky Linux aims to function as a downstream build as CentOS had done previously, building releases after they have been added by the upstream vendor, not before.
+
 ## Install miniconda
 
 ```
@@ -85,3 +91,76 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> 
 
 ```
+
+
+After doing a spack install gcc@9.4.0 I created.
+
+```
+[tkaiser2@eaglet spackit]$ cat ~/.spack/compilers.yaml 
+compilers:
+- compiler:
+    spec: gcc@9.4.0
+    paths:
+      cc: /nopt/nrel/apps/base/gcc-8.4.1/gcc-9.4.0/bin/gcc
+      cxx: /nopt/nrel/apps/base/gcc-8.4.1/gcc-9.4.0/bin/g++
+      f77: /nopt/nrel/apps/base/gcc-8.4.1/gcc-9.4.0/bin/gfortran
+      fc: /nopt/nrel/apps/base/gcc-8.4.1/gcc-9.4.0/bin/gfortran
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+
+[tkaiser2@eaglet spackit]$ 
+```
+
+Then updated  compilers.yaml
+
+```
+[tkaiser2@eaglet .spack]$ cat compilers.yaml 
+compilers:
+- compiler:
+    spec: gcc@9.4.0
+    paths:
+      cc: /nopt/nrel/apps/base/gcc-9.4.0/gcc-9.4.0/bin/gcc
+      cxx: /nopt/nrel/apps/base/gcc-9.4.0/gcc-9.4.0/bin/g++
+      f77: /nopt/nrel/apps/base/gcc-9.4.0/gcc-9.4.0/bin/gfortran
+      fc: /nopt/nrel/apps/base/gcc-9.4.0/gcc-9.4.0/bin/gfortran
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+
+[tkaiser2@eaglet .spack]$ 
+```
+
+This is my base system.
+
+
+
+
+[tkaiser2@eaglet spack]$ pwd
+/home/tkaiser2/spack
+[tkaiser2@eaglet spack]$ git status
+On branch develop
+Your branch is up to date with 'origin/develop'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   etc/spack/defaults/config.yaml
+	modified:   etc/spack/defaults/modules.yaml
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[tkaiser2@eaglet spack]$ 
+
+
+
+
+
+
+
+
