@@ -430,24 +430,24 @@ We could/should also change the modules.yaml file to create a new directory.
 
 
 
+## Installing pip
+
+Pip does not get installed with python.  Here we install pip along side our new version of python.
 
 
+```
+cd /nopt/nrel/level2/gcc-9.4.0/python-3.9.6/bin
+export PATH=`pwd`:$PATH
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
+
+```
 
 
+## Thoughts...
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+Maybe we should not put yaml files in ~/.spack but have each instance of spack keep its own.
 
 
 
