@@ -159,7 +159,55 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 
 
+## level01
 
+```
+
+[tkaiser2@eaglet defaults]$ pwd
+/home/tkaiser2/level01/spack/etc/spack/defaults
+[tkaiser2@eaglet defaults]$ diff -r . /home/tkaiser2/spack/etc/spack/defaults
+diff -r ./config.yaml /home/tkaiser2/spack/etc/spack/defaults/config.yaml
+26d25
+<       all: "level01/${COMPILERNAME}-${COMPILERVER}/${PACKAGE}-${VERSION}"
+diff -r ./modules.yaml /home/tkaiser2/spack/etc/spack/defaults/modules.yaml
+33,34c33,34
+<       tcl: /nopt/nrel/apps/modules/level01/tcl
+<       lmod: /nopt/nrel/apps/modules/level01/lmod
+---
+>       tcl: /nopt/nrel/apps/modules/tcl
+>       lmod: /nopt/nrel/apps/modules/lmod
+44c44
+<       - gcc@9.4.0
+---
+>       - gcc@7.3.1
+Only in .: .modules.yaml.swp
+Only in .: upstreams.yaml
+[tkaiser2@eaglet defaults]$ vi modules.yaml 
+[tkaiser2@eaglet defaults]$ diff -r . /home/tkaiser2/spack/etc/spack/defaults
+diff -r ./config.yaml /home/tkaiser2/spack/etc/spack/defaults/config.yaml
+26d25
+<       all: "level01/${COMPILERNAME}-${COMPILERVER}/${PACKAGE}-${VERSION}"
+diff -r ./modules.yaml /home/tkaiser2/spack/etc/spack/defaults/modules.yaml
+33,34c33,34
+<       tcl: /nopt/nrel/apps/modules/level01/tcl
+<       lmod: /nopt/nrel/apps/modules/level01/lmod
+---
+>       tcl: /nopt/nrel/apps/modules/tcl
+>       lmod: /nopt/nrel/apps/modules/lmod
+44c44
+<       - gcc@9.4.0
+---
+>       - gcc@7.3.1
+Only in .: upstreams.yaml
+[tkaiser2@eaglet defaults]$ cat upstreams.yaml 
+upstreams:
+  spack-base:
+    install_tree: /nopt/nrel/apps
+    modules:
+            lmod: /nopt/nrel/apps/modules/lmod/linux-amzn2-x86_64/gcc/9.4.0
+
+[tkaiser2@eaglet defaults]$ 
+```
 
 
 

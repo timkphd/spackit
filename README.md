@@ -324,6 +324,8 @@ The first instance creates a template assuming the source is local; the second f
 
 VASP can be installed via spack.  However, since the source is licensed it will not be downloaded.  You will need to have a copy in your directory before building it.  
 
+spack install --no-check-signature  --no-checksum vasp
+
 
 ## Pointing to preinstalled apps/libs instead of building them
 
