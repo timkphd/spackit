@@ -1,0 +1,6 @@
+upstreams:
+  spack-level00:
+    install_tree: /nopt/nrel/apps/level00
+    modules:
+            lmod: /nopt/nrel/apps/level00/modules/lmod/linux-rocky8-x86_64/gcc/9.4.0
+
