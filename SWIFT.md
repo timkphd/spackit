@@ -1,8 +1,25 @@
-## OS version
+This document contains additional notes compiled while creating a script to build environments on swift and vermilion.  The final script is *doall*
 
+## Versions
+
+### Swift
 [https://rockylinux.org](https://rockylinux.org)
 
 Rocky Linux aims to function as a downstream build as CentOS had done previously, building releases after they have been added by the upstream vendor, not before.
+
+```
+gcc version = 8.4.1
+```
+
+### Vermilion
+```
+centos8
+[tkaiser2@vs-login-1 gcc-9.4.0]$ ml gnu9
+[tkaiser2@vs-login-1 gcc-9.4.0]$ gcc -v 2>&1 | tail -1
+gcc version 9.3.0 (GCC) 
+[tkaiser2@vs-login-1 gcc-9.4.0]$ 
+```
+
 
 ## Install miniconda
 

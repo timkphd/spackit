@@ -141,7 +141,7 @@ spack install julia
 tymer ~/install julia installed
 
 spack install intel-oneapi-compilers
-tymer ~/install r intel-oneapi-compilers
+tymer ~/install intel-oneapi-compilers
 
 spackit01
 tymer ~/install going to level01
