@@ -165,8 +165,11 @@ chmod 555 /nopt/nrel/apps/anaconda
 
 ################
 
+tymer ~/install conda installed
 
-cat << BONK > myenv.`tstamp`
+export NOW=`tstamp`
+
+cat << BONK > myenv.$NOW
 source /nopt/nrel/apps/level00/gcc-9.4.0/lmod-8.5.6/lmod/8.5.6/init/bash
 
 module use /nopt/nrel/apps/level00/modules/lmod/linux-rocky8-x86_64/gcc/9.4.0                                                                
@@ -182,5 +185,8 @@ alias ma="module avail"
 #alias spackit01="source ~/level01/spack/share/spack/setup-env.sh"
 #alias spackit02="source ~/level02/spack/share/spack/setup-env.sh"
 BONK
+
+tymer ~/install wrote myenv.$NOW
+tymer ~/install  DONE
 
 
