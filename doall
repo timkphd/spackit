@@ -4,11 +4,11 @@ rm -rf /nopt/nrel/apps/level*
 rm -rf /nopt/nrel/apps/modules
 rm -rf /nopt/nrel/apps/anaconda/mini_py39_4.9.2
 rm -rf ~/install
+export PATH=~/spackit:$PATH
 tstamp() {
   date +"%y%m%d%H%M"
 }
 tymer ~/install start
-rm -rf .spack
 for l in level00 level01 level02 ; do
   mkdir $l
   cd $l
@@ -164,5 +164,23 @@ cp spackit/modules/conda/4.9.2.lua /nopt/nrel/apps/modules/conda
 chmod 555 /nopt/nrel/apps/anaconda
 
 ################
+
+
+cat << BONK > myenv.`tstamp`
+source /nopt/nrel/apps/level00/gcc-9.4.0/lmod-8.5.6/lmod/8.5.6/init/bash
+
+module use /nopt/nrel/apps/level00/modules/lmod/linux-rocky8-x86_64/gcc/9.4.0                                                                
+module use /nopt/nrel/apps/level01/modules/lmod/linux-rocky8-x86_64/Core                                                                   
+module use /nopt/nrel/apps/level02/modules/lmod/linux-rocky8-x86_64/Core                                                                   
+module use /nopt/nrel/apps/level02/modules/lmod/linux-rocky8-x86_64/openmpi/4.1.1-ytfvbfl/Core                                                    
+    
+module use /nopt/nrel/apps/modules
+
+alias ma="module avail"
+
+#alias spackit00="source ~/level00/spack/share/spack/setup-env.sh"
+#alias spackit01="source ~/level01/spack/share/spack/setup-env.sh"
+#alias spackit02="source ~/level02/spack/share/spack/setup-env.sh"
+BONK
 
 
