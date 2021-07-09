@@ -193,14 +193,14 @@ chmod 555 /nopt/nrel/apps/anaconda
 tymer ~/install conda installed
 
 export NOW=`tstamp`
-
+export VERSION=`ls /nopt/nrel/apps/level00/modules/lmod`
 cat << BONK > /nopt/nrel/apps/myenv.$NOW
 source /nopt/nrel/apps/level00/gcc-9.4.0/lmod-8.5.6/lmod/8.5.6/init/bash
 
-module use /nopt/nrel/apps/level00/modules/lmod/linux-rocky8-x86_64/gcc/9.4.0                                                                
-module use /nopt/nrel/apps/level01/modules/lmod/linux-rocky8-x86_64/Core                                                                   
-module use /nopt/nrel/apps/level02/modules/lmod/linux-rocky8-x86_64/Core                                                                   
-module use /nopt/nrel/apps/level02/modules/lmod/linux-rocky8-x86_64/openmpi/4.1.1-ytfvbfl/Core                                                    
+module use /nopt/nrel/apps/level00/modules/lmod/$VERSION/gcc/9.4.0                                                                
+module use /nopt/nrel/apps/level01/modules/lmod/$VERSION/Core                                                                   
+module use /nopt/nrel/apps/level02/modules/lmod/$VERSION/Core                                                                   
+module use /nopt/nrel/apps/level02/modules/lmod/$VERSION/openmpi/4.1.1-ytfvbfl/Core                                                    
     
 module use /nopt/nrel/apps/modules
 
