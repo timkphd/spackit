@@ -15,13 +15,14 @@ which python
 which gcc
 
 #Clean out old versions
-
+:<<++++
 rm -rf ~/.spack
 rm -rf ~/level0*
 rm -rf /nopt/nrel/apps/level*
 rm -rf /nopt/nrel/apps/modules
 rm -rf /nopt/nrel/apps/anaconda/mini_py39_4.9.2
 rm -rf ~/install
+++++
 
 # tymer, our wall clock timer is in spackit
 export PATH=~/spackit:$PATH
