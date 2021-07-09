@@ -19,7 +19,7 @@ Kurt and Bill will do the base OS on their machines.
 ## Cloud
 For the cloud machine Kevin did the initial setup.
 
-I noted that ec2 had gcc but the development environemnt was not complete for example is did not have g++ or gfortran.  I also needed git so I did a
+I noted that ec2 had gcc but the development environemnt was not complete for example it did not have g++ or gfortran.  I also needed git so I did a
 
 
 ```
@@ -280,7 +280,7 @@ task    thread             node name  first task    # on node  core
 
 ## Custom and customizing packages
 
-There is repositoy of recipies for building packages at [https://spack.readthedocs.io/en/latest/package_list.html](https://spack.readthedocs.io/en/latest/package_list.html)
+There is repository of recipes for building packages at: [https://spack.readthedocs.io/en/latest/package_list.html](https://spack.readthedocs.io/en/latest/package_list.html)
 
 You can customize builds by specifing arguments on the command line.  See: [https://spack.readthedocs.io/en/latest/features.html#simple-package-installation]()
 
@@ -446,13 +446,28 @@ python get-pip.py
 ```
 
 
-## Thoughts...
+## Other Machines
 
 
-Maybe we should not put yaml files in ~/.spack but have each instance of spack keep its own.
+Other Machines...
+For Swift and Vermilion I create three instance of spack: level00, level01, and level02 and put the config files in their etc/spack/default directory.  Level02 is dependent on level01 and level01 is dependent on level00.  There is an additional config file, upstream.yaml that describes the dependency. Here is the one for level02:
 
+```
+[tkaiser2@vs-login-1 defaults]$ pwd
+/home/tkaiser2/level02/spack/etc/spack/defaults
+[tkaiser2@vs-login-1 defaults]$ cat upstreams.yaml 
+upstreams:
+  spack-level01:
+    install_tree: /nopt/nrel/apps/level01
+    modules:
+            lmod: /nopt/nrel/apps/level01/modules/lmod/linux-rocky8-x86_64/gcc/9.4.0
+  spack-level00:
+    install_tree: /nopt/nrel/apps/level00
+    modules:
+            lmod: /nopt/nrel/apps/level00/modules/lmod/linux-rocky8-x86_64/gcc/9.4.0
 
+[tkaiser2@vs-login-1 defaults]$ 
+```
 
- 
 
 

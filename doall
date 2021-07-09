@@ -5,10 +5,16 @@
 #SBATCH --partition=sm
 #SBATCH --time=06:00:00
 
-ml gnu9
+# on vermilion:
+#     Need to load gcc
+#     There is no python.  /home/tkaiser2/bin/python is linked to python3
+
+ml gnu9 2>/dev/null || echo gnu9 not loaded
 export PATH=/home/tkaiser2/bin:$PATH
 which python
 which gcc
+
+#Clean out old versions
 
 rm -rf ~/.spack
 rm -rf ~/level0*
@@ -17,6 +23,7 @@ rm -rf /nopt/nrel/apps/modules
 rm -rf /nopt/nrel/apps/anaconda/mini_py39_4.9.2
 rm -rf ~/install
 
+# tymer, our wall clock timer is in spackit
 export PATH=~/spackit:$PATH
 
 setperm() {
@@ -58,8 +65,11 @@ spack compiler find
 spack install gcc@9.4.0
 
 tymer ~/install gcc installed #1
+
+# need to update compilers.yaml so it points to our install of gnu
 export OLDC=`gcc -v 2>&1 | tail -1 | awk '{print $3}'`
 export OLDOS=`grep  operating_system: ~/.spack/linux/compilers.yaml | awk '{print $2}'`
+
 cat << BONK > /home/tkaiser2/.spack/linux/compilers.yaml
 compilers:
 - compiler:
@@ -81,6 +91,9 @@ tymer ~/install gcc compilers.yaml updated #1
 
 spack install gcc@9.4.0
 tymer ~/install gcc installed #2
+
+# need to update compilers.yaml so it points to our second install of gnu
+
 
 cat << BONK > /home/tkaiser2/.spack/linux/compilers.yaml
 compilers:
@@ -128,7 +141,7 @@ spack install julia
 tymer ~/install julia installed
 
 spack install intel-oneapi-compilers
-tymer ~/install r intel-oneapi-compilers
+tymer ~/install intel-oneapi-compilers
 
 spackit01
 tymer ~/install going to level01
@@ -171,8 +184,10 @@ tymer ~/install going to level02
 spackit02
 
 cd ~
+if [ -f vasp.6.1.1.tgz ]; then
 spack install --no-check-signature  --no-checksum vasp
 tymer ~/install vasp installed
+fi
 
 spack install octave
 tymer ~/install octave installed
