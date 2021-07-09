@@ -46,7 +46,7 @@ spackit02() {
 	source ~/level02/spack/share/spack/setup-env.sh
 }
 
-tymer ~/install start
+tymer ~/install.$SLURM_JOB_ID start
 for l in level00 level01 level02 ; do
   mkdir $l
   cd $l
@@ -56,7 +56,7 @@ for l in level00 level01 level02 ; do
 done
   
 
-tymer ~/install spack installed
+tymer ~/install.$SLURM_JOB_ID spack installed
 
 spackit00
 
@@ -64,7 +64,7 @@ spack compiler find
 
 spack install gcc@9.4.0
 
-tymer ~/install gcc installed #1
+tymer ~/install.$SLURM_JOB_ID gcc installed #1
 
 # need to update compilers.yaml so it points to our install of gnu
 export OLDC=`gcc -v 2>&1 | tail -1 | awk '{print $3}'`
@@ -87,10 +87,10 @@ compilers:
     extra_rpaths: []
 BONK
 
-tymer ~/install compilers.yaml updated #1
+tymer ~/install.$SLURM_JOB_ID compilers.yaml updated #1
 
 spack install gcc@9.4.0
-tymer ~/install gcc installed #2
+tymer ~/install.$SLURM_JOB_ID gcc installed #2
 
 # need to update compilers.yaml so it points to our second install of gnu
 
@@ -112,48 +112,48 @@ compilers:
     extra_rpaths: []
 BONK
 
-tymer ~/install gcc compilers.yaml updated #2
+tymer ~/install.$SLURM_JOB_ID gcc compilers.yaml updated #2
 
 spack install lmod
 
-tymer ~/install lmod installed
+tymer ~/install.$SLURM_JOB_ID lmod installed
 
 ################
 
 
 
 spack install cmake
-tymer ~/install cmake installed
+tymer ~/install.$SLURM_JOB_ID cmake installed
 
 spack install cuda
-tymer ~/install cuda installed
+tymer ~/install.$SLURM_JOB_ID cuda installed
 
 spack install  llvm
-tymer ~/install llvm installed
+tymer ~/install.$SLURM_JOB_ID llvm installed
 
 spack install python@3.9.6
-tymer ~/install python@3.9.6 installed
+tymer ~/install.$SLURM_JOB_ID python@3.9.6 installed
 
 spack install r
-tymer ~/install r installed
+tymer ~/install.$SLURM_JOB_ID r installed
 
 spack install julia
-tymer ~/install julia installed
+tymer ~/install.$SLURM_JOB_ID julia installed
 
 spack install intel-oneapi-compilers
-tymer ~/install intel-oneapi-compilers
+tymer ~/install.$SLURM_JOB_ID intel-oneapi-compilers
 
 spackit01
-tymer ~/install going to level01
+tymer ~/install.$SLURM_JOB_ID going to level01
 
 spack install intel-oneapi-mpi intel-oneapi-ccl  intel-oneapi-dal intel-oneapi-dnn intel-oneapi-ipp intel-oneapi-ippcp intel-oneapi-mkl intel-oneapi-tbb intel-oneapi-vpl
-tymer ~/install intel-oneapi-tools installed
+tymer ~/install.$SLURM_JOB_ID intel-oneapi-tools installed
 
 spack install mpich
-tymer ~/install mpich installed
+tymer ~/install.$SLURM_JOB_ID mpich installed
 
 spack install openmpi
-tymer ~/install openmpi installed
+tymer ~/install.$SLURM_JOB_ID openmpi installed
 
 ################
 
@@ -180,17 +180,17 @@ python get-pip.py
 export PATH=$OPATH
 cd ~
 
-tymer ~/install going to level02
+tymer ~/install.$SLURM_JOB_ID going to level02
 spackit02
 
 cd ~
 if [ -f vasp.6.1.1.tgz ]; then
 spack install --no-check-signature  --no-checksum vasp
-tymer ~/install vasp installed
+tymer ~/install.$SLURM_JOB_ID vasp installed
 fi
 
 spack install octave
-tymer ~/install octave installed
+tymer ~/install.$SLURM_JOB_ID octave installed
 
 
 ################
@@ -205,7 +205,7 @@ chmod 555 /nopt/nrel/apps/anaconda
 
 ################
 
-tymer ~/install conda installed
+tymer ~/install.$SLURM_JOB_ID conda installed
 
 export NOW=`tstamp`
 export VERSION=`ls /nopt/nrel/apps/level00/modules/lmod`
@@ -226,10 +226,10 @@ alias ma="module avail"
 #alias spackit02="source ~/level02/spack/share/spack/setup-env.sh"
 BONK
 
-tymer ~/install wrote /nopt/nrel/apps/myenv.$NOW
+tymer ~/install.$SLURM_JOB_ID wrote /nopt/nrel/apps/myenv.$NOW
 
 setperm /nopt/nrel/apps
 
-tymer ~/install  DONE
+tymer ~/install.$SLURM_JOB_ID  DONE
 
 
