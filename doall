@@ -87,7 +87,7 @@ compilers:
     extra_rpaths: []
 BONK
 
-tymer ~/install gcc compilers.yaml updated #1
+tymer ~/install compilers.yaml updated #1
 
 spack install gcc@9.4.0
 tymer ~/install gcc installed #2
@@ -215,7 +215,7 @@ source /nopt/nrel/apps/level00/gcc-9.4.0/lmod-8.5.6/lmod/8.5.6/init/bash
 module use /nopt/nrel/apps/level00/modules/lmod/$VERSION/gcc/9.4.0                                                                
 module use /nopt/nrel/apps/level01/modules/lmod/$VERSION/Core                                                                   
 module use /nopt/nrel/apps/level02/modules/lmod/$VERSION/Core                                                                   
-module use /nopt/nrel/apps/level02/modules/lmod/$VERSION/openmpi/4.1.1-ytfvbfl/Core                                                    
+module use /nopt/nrel/apps/level02/modules/lmod/$VERSION/openmpi/*/*
     
 module use /nopt/nrel/apps/modules
 
