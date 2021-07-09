@@ -4,10 +4,19 @@ rm -rf /nopt/nrel/apps/level*
 rm -rf /nopt/nrel/apps/modules
 rm -rf /nopt/nrel/apps/anaconda/mini_py39_4.9.2
 rm -rf ~/install
+
 export PATH=~/spackit:$PATH
+
+setperm() {
+echo setting permissions for $1
+find $1 -perm -u=x -exec chmod go+x {} \;
+find $1 -perm -u=r -exec chmod go+r {} \;
+}
+
 tstamp() {
   date +"%y%m%d%H%M"
 }
+
 tymer ~/install start
 for l in level00 level01 level02 ; do
   mkdir $l
@@ -165,7 +174,7 @@ tymer ~/install conda installed
 
 export NOW=`tstamp`
 
-cat << BONK > myenv.$NOW
+cat << BONK > /nopt/nrel/apps/myenv.$NOW
 source /nopt/nrel/apps/level00/gcc-9.4.0/lmod-8.5.6/lmod/8.5.6/init/bash
 
 module use /nopt/nrel/apps/level00/modules/lmod/linux-rocky8-x86_64/gcc/9.4.0                                                                
@@ -182,7 +191,10 @@ alias ma="module avail"
 #alias spackit02="source ~/level02/spack/share/spack/setup-env.sh"
 BONK
 
-tymer ~/install wrote myenv.$NOW
+tymer ~/install wrote /nopt/nrel/apps/myenv.$NOW
+
+setperm /nopt/nrel/apps
+
 tymer ~/install  DONE
 
 
