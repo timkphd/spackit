@@ -1,0 +1,160 @@
+rm -rf ~/install
+tstamp() {
+  date +"%y%m%d%H%M"
+}
+tymer ~/install start
+rm -rf .spack
+for l in level00 level01 level02 ; do
+  mkdir $l
+  cd $l
+  git clone https://github.com/spack/spack.git
+  cp ~/spackit/swift/$l/spack/etc/spack/defaults/*  spack/etc/spack/defaults
+  cd ..
+done
+  
+alias spackit00="source ~/level00/spack/share/spack/setup-env.sh"
+alias spackit01="source ~/level01/spack/share/spack/setup-env.sh"
+alias spackit02="source ~/level02/spack/share/spack/setup-env.sh"
+
+tymer ~/install spack installed
+
+spackit00
+
+spack compiler find
+
+spack install gcc@9.4.0
+
+tymer ~/install gcc installed #1
+
+cat << BONK > /home/tkaiser2/.spack/linux/compilers.yaml
+compilers:
+- compiler:
+    spec: gcc@9.4.0
+    paths:
+      cc: /nopt/nrel/apps/level00/gcc-8.4.1/gcc-9.4.0/bin/gcc
+      cxx: /nopt/nrel/apps/level00/gcc-8.4.1/gcc-9.4.0/bin/g++
+      f77: /nopt/nrel/apps/level00/gcc-8.4.1/gcc-9.4.0/bin/gfortran
+      fc: /nopt/nrel/apps/level00/gcc-8.4.1/gcc-9.4.0/bin/gfortran
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+BONK
+
+tymer ~/install gcc compilers.yaml updated #1
+
+spack install gcc@9.4.0
+tymer ~/install gcc installed #2
+
+cat << BONK > /home/tkaiser2/.spack/linux/compilers.yaml
+compilers:
+- compiler:
+    spec: gcc@9.4.0
+    paths:
+      cc: /nopt/nrel/apps/level00/gcc-9.4.0/gcc-9.4.0/bin/gcc
+      cxx: /nopt/nrel/apps/level00/gcc-9.4.0/gcc-9.4.0/bin/g++
+      f77: /nopt/nrel/apps/level00/gcc-9.4.0/gcc-9.4.0/bin/gfortran
+      fc: /nopt/nrel/apps/level00/gcc-9.4.0/gcc-9.4.0/bin/gfortran
+    flags: {}
+    operating_system: rocky8
+    target: x86_64
+    modules: []
+    environment: {}
+    extra_rpaths: []
+BONK
+
+tymer ~/install gcc compilers.yaml updated #2
+
+spack install lmod
+
+tymer ~/install lmod installed
+
+################
+
+
+tymer ~/install start
+alias spackit00="source ~/level00/spack/share/spack/setup-env.sh"
+alias spackit01="source ~/level01/spack/share/spack/setup-env.sh"
+alias spackit02="source ~/level02/spack/share/spack/setup-env.sh"
+
+spack install cmake
+tymer ~/install cmake installed
+
+spack install cuda
+tymer ~/install cuda installed
+
+spack install python@3.9.6
+tymer ~/install python@3.9.6 installed
+
+spack install r
+tymer ~/install r installed
+
+spack install julia
+tymer ~/install julia installed
+
+spack install intel-oneapi-compilers
+tymer ~/install r intel-oneapi-compilers
+
+spackit01
+tymer ~/install going to level01
+
+spack install intel-oneapi-mpi intel-oneapi-ccl  intel-oneapi-dal intel-oneapi-dnn intel-oneapi-ipp intel-oneapi-ippcp intel-oneapi-mkl intel-oneapi-tbb intel-oneapi-vpl
+tymer ~/install intel-oneapi-tools installed
+
+spack install mpich
+tymer ~/install mpich installed
+
+spack install openmpi
+tymer ~/install openmpi installed
+
+################
+
+
+
+#pip for python@3.9.6
+cd ~
+cd /nopt/nrel/apps/level00/gcc-9.4.0/python-3.9.6/bin
+export OPATH=$PATH
+export PATH=`pwd`:$PATH
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
+export PATH=$OPATH
+cd ~
+
+
+#python-3.8.11 is installed by R
+#pip for python@3.9.6
+cd /nopt/nrel/apps/level00/gcc-9.4.0/python-3.8.11/bin
+export OPATH=$PATH
+export PATH=`pwd`:$PATH
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
+export PATH=$OPATH
+cd ~
+
+tymer ~/install going to level02
+spackit02
+
+cd ~
+spack install --no-check-signature  --no-checksum vasp
+tymer ~/install vasp installed
+
+spack install octave
+tymer ~/install octave installed
+
+
+################
+
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.9.2-Linux-x86_64.sh
+chmod 755 Miniconda3-py39_4.9.2-Linux-x86_64.sh
+./Miniconda3-py39_4.9.2-Linux-x86_64.sh -b -p /nopt/nrel/apps/anaconda/mini_py39_4.9.2 -s
+mkdir -p /nopt/nrel/apps/modules/conda
+cp spackit/modules/conda/4.9.2.lua /nopt/nrel/apps/modules/conda
+
+
+################
+
+
