@@ -79,10 +79,6 @@ tymer ~/install lmod installed
 ################
 
 
-tymer ~/install start
-alias spackit00="source ~/level00/spack/share/spack/setup-env.sh"
-alias spackit01="source ~/level01/spack/share/spack/setup-env.sh"
-alias spackit02="source ~/level02/spack/share/spack/setup-env.sh"
 
 spack install cmake
 tymer ~/install cmake installed
