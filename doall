@@ -1,3 +1,8 @@
+rm -rf ~/.spack
+rm -rf ~/level0*
+rm -rf /nopt/nrel/apps/level*
+rm -rf /nopt/nrel/apps/modules
+rm -rf /nopt/nrel/apps/anaconda/mini_py39_4.9.2
 rm -rf ~/install
 tstamp() {
   date +"%y%m%d%H%M"
@@ -85,6 +90,9 @@ tymer ~/install cmake installed
 spack install cuda
 tymer ~/install cuda installed
 
+spack install  llvm
+tymer ~/install llvm installed
+
 spack install python@3.9.6
 tymer ~/install python@3.9.6 installed
 
@@ -147,13 +155,13 @@ tymer ~/install octave installed
 
 ################
 
-
+rm -rf /nopt/nrel/apps/anaconda/mini_py39_4.9.2
 wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.9.2-Linux-x86_64.sh
 chmod 755 Miniconda3-py39_4.9.2-Linux-x86_64.sh
 ./Miniconda3-py39_4.9.2-Linux-x86_64.sh -b -p /nopt/nrel/apps/anaconda/mini_py39_4.9.2 -s
 mkdir -p /nopt/nrel/apps/modules/conda
 cp spackit/modules/conda/4.9.2.lua /nopt/nrel/apps/modules/conda
-
+chmod 555 /nopt/nrel/apps/anaconda
 
 ################
 
